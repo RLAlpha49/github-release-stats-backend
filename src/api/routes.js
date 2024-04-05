@@ -2,8 +2,7 @@ const express = require('express')
 const router = express.Router()
 const statsController = require('./controllers/statsController')
 
-// Define your routes here
-router.post('/save-stats/:repo', statsController.saveStats)
-router.get('/get-stats/:repo', statsController.getStats)
+router.post('/save-stats/:username/:repo', statsController.saveStats)
+router.get('/get-stats/:username/:repo', statsController.getStats)
 
 module.exports = router

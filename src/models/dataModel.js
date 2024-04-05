@@ -24,4 +24,9 @@ const RepoSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Repo', RepoSchema)
+const UserSchema = new mongoose.Schema({
+  username: String,
+  repos: [RepoSchema]
+})
+
+module.exports = mongoose.model('User', UserSchema)
