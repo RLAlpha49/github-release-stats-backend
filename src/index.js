@@ -4,6 +4,8 @@ const routes = require('./api/routes')
 const { MongoClient, ServerApiVersion } = require('mongodb')
 const uri = process.env.MONGODB_URI
 
+const { logger, corsHandler, jsonParser, errorHandler, limiter } = require('./utils/middleware')
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -15,8 +17,11 @@ const client = new MongoClient(uri, {
 
 const app = express()
 
-app.use(express.json())
-app.use('/api', routes)
+app.use(logger) // Use the logger middleware
+app.use(corsHandler) // Use the CORS handler middleware
+app.use(jsonParser) // Use the JSON parser middleware
+app.use(errorHandler) // Use the error handler middleware
+app.use('/api', limiter, routes) // Use the rate limiter middleware
 
 async function run () {
   try {
