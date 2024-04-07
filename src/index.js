@@ -37,9 +37,8 @@ async function run () {
     })
 
     return server // Return the server instance
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close()
+  } catch (error) {
+    console.error(error)
   }
 }
 
