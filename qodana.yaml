@@ -10,3 +10,7 @@ exclude:
       - src/utils/middleware.js
 include:
   - name: CheckDependencyLicenses
+license:
+  project: GPL-3.0-only
+  allowed:
+    - 0BSD

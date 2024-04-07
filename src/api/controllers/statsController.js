@@ -20,8 +20,14 @@ async function saveStats (req, res) {
       res.status(404).json({ message: 'There are no releases for this project' })
     } else {
       const statsPromises = response.map(async (release) => {
-        // eslint-disable-next-line camelcase
-        const { tag_name: releaseTag, html_url: releaseURL, assets: releaseAssets, author: authorObj, published_at } = release
+        const {
+          tag_name: releaseTag,
+          html_url: releaseURL,
+          assets: releaseAssets,
+          author: authorObj,
+          // eslint-disable-next-line camelcase
+          published_at
+        } = release
         const hasAssets = releaseAssets.length !== 0
         const releaseAuthor = authorObj ? { html_url: authorObj.html_url, login: authorObj.login } : null
         const hasAuthor = releaseAuthor != null
@@ -32,7 +38,13 @@ async function saveStats (req, res) {
 
         if (hasAssets) {
           const assetsPromises = releaseAssets.map(async (asset) => {
-            const { name, size, updated_at: lastUpdate, download_count: downloadCount, browser_download_url: browserDownloadUrl } = asset
+            const {
+              name,
+              size,
+              updated_at: lastUpdate,
+              download_count: downloadCount,
+              browser_download_url: browserDownloadUrl
+            } = asset
             const assetSize = (size / 1048576.0).toLocaleString(undefined, { maximumFractionDigits: 2 })
             ReleaseDownloadCount += downloadCount
 
