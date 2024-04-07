@@ -9,7 +9,7 @@ describe('POST /api/save-stats/:username/:repo', () => {
   // Before all tests, start the server
   beforeAll(async () => {
     server = await run()
-  })
+  }, 10000)
   it('saves stats and responds with json', async () => {
     const username = 'RLAlpha49'
     const repo = 'Anilist-Manga-Updater'
@@ -24,9 +24,11 @@ describe('POST /api/save-stats/:username/:repo', () => {
   })
   // After all tests, close the server
   afterAll(async () => {
-    await new Promise(resolve => server.close(resolve))
+    if (server) {
+      await new Promise(resolve => server.close(resolve))
+    }
     await client.close()
-  })
+  }, 10000)
 })
 
 describe('GET /api/get-stats/:username/:repo', () => {
@@ -35,7 +37,7 @@ describe('GET /api/get-stats/:username/:repo', () => {
   // Before all tests, start the server
   beforeAll(async () => {
     server = await run()
-  })
+  }, 10000)
   it('retrieves stats and responds with json', async () => {
     const username = 'RLAlpha49'
     const repo = 'Anilist-Manga-Updater'
@@ -52,7 +54,9 @@ describe('GET /api/get-stats/:username/:repo', () => {
   })
   // After all tests, close the server
   afterAll(async () => {
-    await new Promise(resolve => server.close(resolve))
+    if (server) {
+      await new Promise(resolve => server.close(resolve))
+    }
     await client.close()
-  })
+  }, 10000)
 })

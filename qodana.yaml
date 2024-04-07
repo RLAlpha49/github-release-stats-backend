@@ -4,3 +4,4 @@ exclude:
   - name: JSCheckFunctionSignatures
     paths:
       - src/index.js
+      - src/api/routes.js

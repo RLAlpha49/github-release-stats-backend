@@ -13,7 +13,7 @@ const corsHandler = cors()
 const jsonParser = express.json()
 
 // Error handling middleware
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res) => {
   console.error(err.stack || err.message || err)
   res.status(500).json({ message: 'Something broke!' })
 }
