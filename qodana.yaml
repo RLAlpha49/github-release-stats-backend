@@ -5,3 +5,6 @@ exclude:
     paths:
       - src/index.js
       - src/api/routes.js
+  - name: JSUnusedLocalSymbols
+    paths:
+      - src/api/routes.js
