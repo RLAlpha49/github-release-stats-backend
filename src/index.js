@@ -6,7 +6,6 @@ const uri = process.env.MONGODB_URI
 
 const { logger, corsHandler, jsonParser, errorHandler, logRequestUrl } = require('./utils/middleware')
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -30,16 +29,19 @@ async function run () {
     await client.db('admin').command({ ping: 1 })
     console.log('Pinged your deployment. You successfully connected to MongoDB!')
 
-    // Start the server
     const port = process.env.PORT || 3000
-    const server = app.listen(port, () => { // Assign the server instance to the server variable
+    const server = app.listen(port, () => {
       console.log(`Server is running on port ${port}`)
     })
 
-    return server // Return the server instance
+    return server
   } catch (error) {
     console.error(error)
   }
 }
 
 module.exports = { run, client }
+
+if (require.main === module) {
+  run()
+}
