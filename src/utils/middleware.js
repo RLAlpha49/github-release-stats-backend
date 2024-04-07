@@ -7,7 +7,20 @@ const cors = require('cors')
 const logger = morgan('dev')
 
 // Middleware for enabling CORS
-const corsHandler = cors()
+const corsHandler = cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin
+    // (like mobile apps or curl requests)
+    if (!origin) return callback(null, true)
+
+    if (/\.alpha49\.com$/.test(origin)) {
+      return callback(null, true)
+    }
+
+    callback(new Error('Not allowed by CORS'))
+  },
+  optionsSuccessStatus: 200
+})
 
 // Middleware for parsing JSON bodies
 const jsonParser = express.json()

@@ -19,7 +19,7 @@ async function saveStats (req, res) {
     if (response.length === 0) {
       res.status(404).json({ message: 'There are no releases for this project' })
     } else {
-      const stats = response.map(release => {
+      const statsPromises = response.map(async (release) => {
         // eslint-disable-next-line camelcase
         const { tag_name: releaseTag, html_url: releaseURL, assets: releaseAssets, author: authorObj, published_at } = release
         const hasAssets = releaseAssets.length !== 0
@@ -31,7 +31,7 @@ async function saveStats (req, res) {
         const assets = []
 
         if (hasAssets) {
-          for (const asset of releaseAssets) {
+          const assetsPromises = releaseAssets.map(async (asset) => {
             const { name, size, updated_at: lastUpdate, download_count: downloadCount, browser_download_url: browserDownloadUrl } = asset
             const assetSize = (size / 1048576.0).toLocaleString(undefined, { maximumFractionDigits: 2 })
             ReleaseDownloadCount += downloadCount
@@ -44,7 +44,9 @@ async function saveStats (req, res) {
               downloadCount,
               browserDownloadUrl
             })
-          }
+          })
+
+          await Promise.all(assetsPromises)
         }
 
         return {
@@ -58,6 +60,8 @@ async function saveStats (req, res) {
           assets
         }
       })
+
+      const stats = await Promise.all(statsPromises)
 
       let timestamp = new Date().toISOString() // Get the current timestamp in ISO format
       timestamp = timestamp.replace('T', '_') // Replace 'T' with '_'
