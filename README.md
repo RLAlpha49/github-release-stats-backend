@@ -36,12 +36,18 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## API Endpoints
 
-- POST `/api/save-stats/:repo`: Save stats for a specific repository.
-- GET `/api/get-stats/:repo`: Get stats for a specific repository.
+- POST `/api/save-stats/:username/:repo`: Save stats for a specific repository.
+- GET `/api/get-stats/:username/:repo`: Get stats for a specific repository.
 
 ## Running the Tests
 
-Explain how to run the automated tests for this system.
+To run the tests, use the following command:
+
+```bash
+npm test
+```
+
+This will start the server and then run the tests.
 
 ## Deployment
 
