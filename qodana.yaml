@@ -8,3 +8,5 @@ exclude:
   - name: JSUnusedLocalSymbols
     paths:
       - src/utils/middleware.js
+include:
+  - name: CheckDependencyLicenses

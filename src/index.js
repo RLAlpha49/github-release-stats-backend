@@ -44,4 +44,10 @@ module.exports = { run, client }
 
 if (require.main === module) {
   run()
+    .then(server => {
+      console.log('Server started successfully')
+    })
+    .catch(error => {
+      console.error('Error starting the server:', error)
+    })
 }
