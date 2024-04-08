@@ -21,7 +21,7 @@ app.use(corsHandler)
 app.use(jsonParser)
 app.use(errorHandler)
 app.use(logRequestUrl)
-app.use('/api', routes)
+app.use('/github-release-stats/api', routes)
 
 async function run () {
   try {

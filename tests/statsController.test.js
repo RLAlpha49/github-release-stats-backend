@@ -14,10 +14,10 @@ const username = 'RLAlpha49'
 const repos = ['Idle-Slayer-Script', 'Anilist-Manga-Updater', 'Anilist-Follower-And-Liking-Tool']
 
 repos.forEach(repo => {
-  describe(`POST /api/save-stats/${username}/${repo}`, () => {
+  describe(`POST /github-release-stats/api/save-stats/${username}/${repo}`, () => {
     it('saves stats and responds with json', async () => {
       const response = await request(server)
-        .post(`/api/save-stats/${username}/${repo}`)
+        .post(`/github-release-stats/api/save-stats/${username}/${repo}`)
         .expect(200)
         .expect('Content-Type', /json/)
 
@@ -26,10 +26,10 @@ repos.forEach(repo => {
     })
   })
 
-  describe(`GET /api/get-stats/${username}/${repo}`, () => {
+  describe(`GET /github-release-stats/api/get-stats/${username}/${repo}`, () => {
     it('retrieves stats and responds with json', async () => {
       const response = await request(server)
-        .get(`/api/get-stats/${username}/${repo}`)
+        .get(`/github-release-stats/api/get-stats/${username}/${repo}`)
         .expect(200)
         .expect('Content-Type', /json/)
 
