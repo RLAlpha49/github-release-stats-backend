@@ -13,7 +13,7 @@ const corsHandler = cors({
     // (like mobile apps or curl requests)
     if (!origin) return callback(null, true)
 
-    if (/\.alpha49\.com$/.test(origin)) {
+    if (/\.alpha49\.com$/.test(origin) || origin === 'http://localhost:8080') {
       return callback(null, true)
     }
 
