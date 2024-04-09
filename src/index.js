@@ -16,13 +16,13 @@ const client = new MongoClient(uri, {
 
 const app = express()
 
-app.set('trust proxy', function (ip) {
+app.set('trust proxy', function (ip, req) {
   if (ip === req.headers['cf-connecting-ip'] || ip.substr(0, 8) === '127.0.0.1') { // trusted IPs
-    return true;
+    return true
   } else {
-    return false;
+    return false
   }
-});
+})
 
 app.use(logger)
 app.use(corsHandler)
