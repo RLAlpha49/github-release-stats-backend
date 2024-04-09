@@ -16,6 +16,8 @@ const client = new MongoClient(uri, {
 
 const app = express()
 
+app.set('trust proxy', true)
+
 app.use(logger)
 app.use(corsHandler)
 app.use(jsonParser)
